@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PassKit Pro: Passport, Visa & Signature Suite</title>
+  
+  <!-- Primary SEO Tags -->
+<meta name="description" content="Free online passport photo creator. Auto-crop to 35x45mm Indian passport, 51x51mm (2x2) US Visa, change background to passport blue, format signatures, and calculate DOB.">
+<meta name="keywords" content="passport photo creator, 35x45 mm photo maker, 2x2 inch US visa photo, change background to blue, signature resizer, age calculator">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:title" content="PassKit Pro: Free Passport Photo & Signature Tool">
+<meta property="og:description" content="Auto-crop and format compliance-ready passport photos and signatures in seconds.">
+<meta property="og:type" content="website">
+  
+  <!-- Tailwind CSS & Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at 10% 20%, rgb(14, 165, 233) 0%, rgb(99, 102, 241) 50.3%, rgb(236, 72, 153) 90%);
+      background-attachment: fixed;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.12);
+    }
+    .checkered-pattern {
+      background-size: 14px 14px;
+      background-image: conic-gradient(#e2e8f0 90deg, #fff 90deg 180deg, #e2e8f0 180deg 270deg, #fff 270deg);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col p-3 sm:p-6 lg:p-8">
+
+  <!-- Top Announcement Bar / Monetization Banner -->
+  <div class="max-w-7xl w-full mx-auto mb-4 bg-slate-900/80 backdrop-blur-md text-white px-4 py-2 rounded-xl text-xs flex items-center justify-between border border-white/20">
+    <div class="flex items-center gap-2">
+      <span class="bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">PRO</span>
+      <span>Generate 300 DPI compliant photos for <strong>Indian Passport, US Visa (2x2), and Global 4x4</strong> applications.</span>
+    </div>
+    <button onclick="openMonetizationModal()" class="hidden sm:inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 font-bold transition">
+      <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Get 8-Photo Printable Sheet
+    </button>
+  </div>
+
+  <!-- Header -->
+  <header class="max-w-7xl w-full mx-auto glass-card rounded-2xl p-4 sm:px-6 mb-6 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+        <i data-lucide="shield-check" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">Pass<span class="text-blue-600">Kit</span></h1>
+          <span class="text-[10px] bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded-full uppercase">300 DPI Studio</span>
+        </div>
+        <p class="text-xs text-slate-500 font-medium">Compliance-Ready Passport, Visa & Signature Formatter</p>
+      </div>
+    </div>
+
+    <!-- Live Counter & Monetize Action -->
+    <div class="flex items-center gap-3">
+      <div class="flex items-center space-x-2 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3.5 py-1.5 rounded-full text-xs font-bold">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span>Processed: <strong id="live-counter" class="text-emerald-950">2,841</strong></span>
+      </div>
+      <button onclick="openTipModal()" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow-md flex items-center gap-1.5 transition">
+        <i data-lucide="coffee" class="w-3.5 h-3.5"></i> <span>Support Tool</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-Column Dashboard Layout -->
+  <main class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    
+    <!-- MODULE 1: Passport Photo Creator -->
+    <section class="lg:col-span-5 glass-card rounded-3xl p-6 space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div>
+          <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="camera" class="w-5 h-5 text-blue-600"></i> Passport Photo Creator
+          </h2>
+          <span class="text-xs text-slate-500">Auto-Crop & Background Color Switcher</span>
+        </div>
+        <span id="badgeCurrentFormat" class="text-[11px] font-bold bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md">35 x 45 mm</span>
+      </div>
+
+      <!-- Format Standard Selector -->
+      <div>
+        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Select Official Format</label>
+        <div class="grid grid-cols-3 gap-2 text-xs">
+          <button onclick="setStandardFormat('india')" id="btnFormatIndia" class="format-btn border-2 border-blue-600 bg-blue-50/50 text-blue-900 font-bold p-2 rounded-xl text-center transition">
+            <div class="text-[11px]">Standard India</div>
+            <div class="text-[10px] text-slate-500 font-normal">35x45 mm (7:9)</div>
+          </button>
+          <button onclick="setStandardFormat('square')" id="btnFormatSquare" class="format-btn border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold p-2 rounded-xl text-center transition">
+            <div class="text-[11px]">Global Square</div>
+            <div class="text-[10px] text-slate-500 font-normal">40x40 mm (1:1)</div>
+          </button>
+          <button onclick="setStandardFormat('us')" id="btnFormatUS" class="format-btn border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold p-2 rounded-xl text-center transition">
+            <div class="text-[11px]">US / OCI Visa</div>
+            <div class="text-[10px] text-slate-500 font-normal">51x51 mm (2x2")</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Background Color Switcher -->
+      <div>
+        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Passport Background Color</label>
+        <div class="flex items-center gap-3">
+          <button onclick="changePhotoBg('#2563eb')" class="w-8 h-8 rounded-full bg-blue-600 ring-2 ring-offset-2 ring-blue-600 shadow-sm" title="Passport Royal Blue"></button>
+          <button onclick="changePhotoBg('#38bdf8')" class="w-8 h-8 rounded-full bg-sky-400 hover:ring-2 hover:ring-offset-2 ring-sky-400 shadow-sm" title="Light Blue"></button>
+          <button onclick="changePhotoBg('#ffffff')" class="w-8 h-8 rounded-full bg-white border border-slate-300 hover:ring-2 hover:ring-offset-2 ring-slate-400 shadow-sm" title="Official White"></button>
+          <button onclick="changePhotoBg('#f1f5f9')" class="w-8 h-8 rounded-full bg-slate-100 border border-slate-300 hover:ring-2 hover:ring-offset-2 ring-slate-400 shadow-sm" title="Off-White/Grey"></button>
+          <button onclick="changePhotoBg('#dc2626')" class="w-8 h-8 rounded-full bg-red-600 hover:ring-2 hover:ring-offset-2 ring-red-600 shadow-sm" title="Passport Red"></button>
+        </div>
+      </div>
+
+      <!-- File Upload Zone -->
+      <div class="border-2 border-dashed border-blue-300 hover:border-blue-500 bg-blue-50/40 hover:bg-blue-50/80 transition rounded-2xl p-5 text-center cursor-pointer relative">
+        <input type="file" id="imageInput" accept="image/jpeg, image/png, image/webp" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+        <div class="flex flex-col items-center">
+          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-blue-600 shadow-md mb-1.5">
+            <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+          </div>
+          <p class="text-xs font-bold text-slate-700">Upload Portrait Photo</p>
+          <p class="text-[10px] text-slate-400">Auto-aligns face, applies color & sets 300 DPI</p>
+        </div>
+      </div>
+
+      <!-- Image Adjuster Sliders -->
+      <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200 text-[11px]">
+        <div>
+          <label class="font-bold text-slate-600 flex justify-between">Zoom <span id="valZoom">1.1x</span></label>
+          <input type="range" id="sliderZoom" min="0.8" max="2.0" step="0.05" value="1.1" oninput="renderPhotoCanvas()" class="w-full h-1.5 bg-slate-200 rounded-lg accent-blue-600 cursor-pointer mt-1">
+        </div>
+        <div>
+          <label class="font-bold text-slate-600 flex justify-between">Face Y-Pos <span id="valYPos">0</span></label>
+          <input type="range" id="sliderY" min="-100" max="100" step="2" value="0" oninput="renderPhotoCanvas()" class="w-full h-1.5 bg-slate-200 rounded-lg accent-blue-600 cursor-pointer mt-1">
+        </div>
+      </div>
+
+      <!-- Side-by-Side Comparison Window -->
+      <div class="grid grid-cols-2 gap-3 items-center">
+        <div class="text-center">
+          <span class="text-[10px] font-bold text-slate-400 block mb-1">ORIGINAL</span>
+          <div class="w-full aspect-[7/9] rounded-xl overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center shadow-inner">
+            <img id="origImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80" alt="Original" class="w-full h-full object-cover">
+          </div>
+        </div>
+
+        <div class="text-center">
+          <span class="text-[10px] font-bold text-blue-600 block mb-1" id="lblProcessedAspect">PROCESSED (35x45 mm)</span>
+          <div id="canvasWrapper" class="w-full aspect-[7/9] rounded-xl overflow-hidden border-2 border-blue-500 shadow-md flex items-center justify-center relative">
+            <canvas id="outputCanvas" class="w-full h-full object-cover"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2">
+        <button onclick="downloadSinglePhoto()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition active:scale-95">
+          <i data-lucide="download" class="w-4 h-4 text-emerald-400"></i>
+          <span>Download Single</span>
+        </button>
+        <button onclick="openMonetizationModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md transition active:scale-95">
+          <i data-lucide="printer" class="w-4 h-4 text-amber-300"></i>
+          <span>Download 8-Photo Sheet</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- MODULE 2: Signature Formatter -->
+    <section class="lg:col-span-4 glass-card rounded-3xl p-6 space-y-5">
+      <div class="border-b border-slate-100 pb-3">
+        <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <i data-lucide="pen-tool" class="w-5 h-5 text-indigo-600"></i> Signature Resizer
+        </h2>
+        <span class="text-xs text-slate-500">Government Portal Dimension Lock</span>
+      </div>
+
+      <!-- Upload Zone -->
+      <div class="border-2 border-dashed border-indigo-200 hover:border-indigo-400 bg-indigo-50/30 p-4 rounded-2xl text-center relative cursor-pointer">
+        <input type="file" id="sigInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+        <i data-lucide="signature" class="w-6 h-6 mx-auto text-indigo-600 mb-1"></i>
+        <p class="text-xs font-bold text-slate-700">Upload Signature Image</p>
+        <p class="text-[10px] text-slate-400">White background recommended</p>
+      </div>
+
+      <!-- Unit & Control Toggles -->
+      <div class="bg-slate-100/80 p-3.5 rounded-2xl space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-600">Dimension Units</span>
+          <div class="flex bg-slate-200 rounded-lg p-0.5 text-[11px] font-bold">
+            <button id="btnSigPx" onclick="setSigUnit('px')" class="px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm">Pixels</button>
+            <button id="btnSigIn" onclick="setSigUnit('in')" class="px-2.5 py-1 rounded-md text-slate-600">Inches</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] uppercase font-bold text-slate-500" id="lblWidth">Width (px)</label>
+            <input type="number" id="sigW" value="280" oninput="renderSignatureBox()" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-bold focus:ring-2 focus:ring-indigo-500 outline-none">
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold text-slate-500" id="lblHeight">Height (px)</label>
+            <input type="number" id="sigH" value="100" oninput="renderSignatureBox()" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-bold focus:ring-2 focus:ring-indigo-500 outline-none">
+          </div>
+        </div>
+      </div>
+
+      <!-- Signature Bounding Box -->
+      <div>
+        <span class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Bounding Preview</span>
+        <div class="mt-1 h-40 w-full rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center p-2 overflow-hidden">
+          <div id="sigBox" class="checkered-pattern border-2 border-indigo-500 rounded-lg flex items-center justify-center transition-all p-1" style="width: 240px; height: 90px;">
+            <img id="sigImg" src="https://api.iconify.design/fluent-emoji-flat:pen.svg" alt="Signature preview" class="max-h-full max-w-full object-contain">
+          </div>
+        </div>
+      </div>
+
+      <!-- Export Signature Button -->
+      <button onclick="downloadFormattedSignature()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition active:scale-95">
+        <i data-lucide="crop" class="w-4 h-4 text-indigo-400"></i>
+        <span>Download Formatted Signature</span>
+      </button>
+    </section>
+
+    <!-- MODULE 3: Accurate DOB, Age Calculator & Feedback -->
+    <div class="lg:col-span-3 space-y-6">
+      
+      <!-- DOB Card -->
+      <section class="glass-card rounded-3xl p-5 space-y-4">
+        <div>
+          <h2 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+            <i data-lucide="calendar" class="w-4 h-4 text-pink-600"></i> Accurate DOB & Age
+          </h2>
+          <span class="text-[11px] text-slate-500">Official passport reference check</span>
+        </div>
+
+        <div>
+          <label class="text-[10px] font-bold uppercase text-slate-500 block mb-1">Select Date of Birth</label>
+          <input type="date" id="dobInput" onchange="calculateAccurateAge()" value="1998-04-12" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2 text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-pink-500">
+        </div>
+
+        <div class="space-y-2">
+          <div class="bg-gradient-to-r from-pink-50 to-rose-50 p-2.5 rounded-xl border border-pink-100">
+            <span class="text-[10px] font-bold uppercase text-pink-700 block">Exact Document Age</span>
+            <span class="text-sm font-extrabold text-slate-900" id="metricExactAge">--</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+              <span class="text-[10px] font-bold uppercase text-slate-500 block">Total Days</span>
+              <span class="text-xs font-black text-slate-800" id="metricTotalDays">--</span>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+              <span class="text-[10px] font-bold uppercase text-slate-500 block">Next Birthday</span>
+              <span class="text-xs font-black text-indigo-600" id="metricNextBday">--</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feedback Widget -->
+      <section class="glass-card rounded-3xl p-5">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Feedback & Rating</h3>
+        
+        <div id="feedbackForm" class="space-y-2.5">
+          <div class="flex justify-center gap-1 text-amber-400" id="starsGroup">
+            <button onclick="setStars(1)" class="star"><i data-lucide="star" class="w-5 h-5 fill-current"></i></button>
+            <button onclick="setStars(2)" class="star"><i data-lucide="star" class="w-5 h-5 fill-current"></i></button>
+            <button onclick="setStars(3)" class="star"><i data-lucide="star" class="w-5 h-5 fill-current"></i></button>
+            <button onclick="setStars(4)" class="star"><i data-lucide="star" class="w-5 h-5 fill-current"></i></button>
+            <button onclick="setStars(5)" class="star"><i data-lucide="star" class="w-5 h-5 fill-current"></i></button>
+          </div>
+
+          <textarea id="feedbackComments" rows="2" placeholder="Suggest a new portal or feature..." class="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2 focus:ring-2 focus:ring-indigo-500 outline-none resize-none"></textarea>
+
+          <button onclick="submitFeedback()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold py-2 rounded-xl transition">
+            Submit Feedback
+          </button>
+        </div>
+
+        <div id="feedbackDone" class="hidden text-center py-3 text-xs font-semibold text-emerald-600 bg-emerald-50 rounded-xl border border-emerald-200">
+          <i data-lucide="check-circle" class="w-4 h-4 mx-auto mb-1 text-emerald-500"></i>
+          Thank you for rating PassKit!
+        </div>
+      </section>
+
+      <!-- Ad / Sponsor Placeholder (AdSense Ready) -->
+      <div class="rounded-2xl border border-white/40 bg-white/60 p-3 text-center text-slate-400 text-[10px] flex items-center justify-center">
+        <span>Advertisement &bull; Compliant with Visa Specification ISO 19794-5</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- MONETIZATION MODAL: 8-Photo Printable Sheet Upgrade -->
+  <div id="monetizeModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card max-w-md w-full rounded-3xl p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+      <button onclick="closeMonetizationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center space-y-3">
+        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
+          <i data-lucide="printer" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-lg font-extrabold text-slate-900">4x6" Printable Grid Sheet</h3>
+        <p class="text-xs text-slate-500">Instantly generate a ready-to-print 8-photo layout on standard 4x6" glossy paper. Save studio printing costs.</p>
+        
+        <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between text-left">
+          <div>
+            <div class="text-xs font-bold text-slate-800">PassKit Pro Print Sheet</div>
+            <div class="text-[10px] text-emerald-600 font-semibold">&check; Ultra 300 DPI &bull; 8 Photos with Cut Marks</div>
+          </div>
+          <span class="text-base font-extrabold text-slate-900">$1.99</span>
+        </div>
+
+        <button onclick="generatePrintSheet()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg transition">
+          <i data-lucide="zap" class="w-4 h-4 text-amber-300"></i> Generate & Download Sheet (.PNG)
+        </button>
+        <p class="text-[10px] text-slate-400">Free preview generation unlocked for testing.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIP MODAL -->
+  <div id="tipModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-card max-w-sm w-full rounded-3xl p-6 shadow-2xl relative text-center space-y-4">
+      <button onclick="closeTipModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto">
+        <i data-lucide="coffee" class="w-6 h-6"></i>
+      </div>
+      <h3 class="text-base font-bold text-slate-900">Support PassKit Free Tools</h3>
+      <p class="text-xs text-slate-500">PassKit is 100% free and client-side safe. Support hosting and updates with a coffee!</p>
+      <div class="flex justify-center gap-2">
+        <button onclick="alert('Redirecting to Stripe / Razorpay / PayPal Gateway...')" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-xl text-xs transition">$3</button>
+        <button onclick="alert('Redirecting to Stripe / Razorpay / PayPal Gateway...')" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-xl text-xs transition">$5</button>
+        <button onclick="alert('Redirecting to Stripe / Razorpay / PayPal Gateway...')" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-xl text-xs transition">$10</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    lucide.createIcons();
+    const TODAY_DATE = new Date();
+
+    // Standard Preset Database (300 DPI specs)
+    const FORMAT_PRESETS = {
+      india: {
+        name: 'Standard India',
+        ratioText: '35 x 45 mm',
+        width: 413,   // 35mm at 300 DPI
+        height: 531,  // 45mm at 300 DPI
+        aspect: 'aspect-[7/9]'
+      },
+      square: {
+        name: 'Global Square',
+        ratioText: '40 x 40 mm',
+        width: 472,   // 40mm at 300 DPI
+        height: 472,  // 40mm at 300 DPI
+        aspect: 'aspect-square'
+      },
+      us: {
+        name: 'US / OCI Visa',
+        ratioText: '51 x 51 mm (2x2 in)',
+        width: 600,   // 2in at 300 DPI
+        height: 600,  // 2in at 300 DPI
+        aspect: 'aspect-square'
+      }
+    };
+
+    let activeFormat = 'india';
+    let activeBgColor = '#2563eb'; // Passport Royal Blue default
+    let loadedImage = new Image();
+    loadedImage.crossOrigin = "anonymous";
+    loadedImage.src = document.getElementById('origImg').src;
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      loadedImage.onload = () => renderPhotoCanvas();
+      calculateAccurateAge();
+      renderSignatureBox();
+    });
+
+    // 1. PASSPORT PHOTO ENGINE
+    const outputCanvas = document.getElementById('outputCanvas');
+    const ctx = outputCanvas.getContext('2d');
+    const imageInput = document.getElementById('imageInput');
+
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        document.getElementById('origImg').src = evt.target.result;
+        loadedImage.src = evt.target.result;
+        loadedImage.onload = () => {
+          renderPhotoCanvas();
+          // Update live counter
+          const counter = document.getElementById('live-counter');
+          counter.innerText = (parseInt(counter.innerText.replace(',', '')) + 1).toLocaleString();
+        };
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function setStandardFormat(formatKey) {
+      activeFormat = formatKey;
+      const preset = FORMAT_PRESETS[formatKey];
+
+      // Update Active Button Styles
+      document.querySelectorAll('.format-btn').forEach(b => {
+        b.className = 'format-btn border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold p-2 rounded-xl text-center transition';
+      });
+      const activeBtn = document.getElementById('btnFormat' + formatKey.charAt(0).toUpperCase() + formatKey.slice(1));
+      if (activeBtn) {
+        activeBtn.className = 'format-btn border-2 border-blue-600 bg-blue-50/50 text-blue-900 font-bold p-2 rounded-xl text-center transition';
+      }
+
+      document.getElementById('badgeCurrentFormat').innerText = preset.ratioText;
+      document.getElementById('lblProcessedAspect').innerText = `PROCESSED (${preset.ratioText})`;
+
+      // Adjust Canvas Wrapper Aspect Ratio
+      const canvasWrapper = document.getElementById('canvasWrapper');
+      canvasWrapper.className = `w-full ${preset.aspect} rounded-xl overflow-hidden border-2 border-blue-500 shadow-md flex items-center justify-center relative`;
+
+      renderPhotoCanvas();
+    }
+
+    function changePhotoBg(colorHex) {
+      activeBgColor = colorHex;
+      renderPhotoCanvas();
+    }
+
+    function renderPhotoCanvas() {
+      const preset = FORMAT_PRESETS[activeFormat];
+      outputCanvas.width = preset.width;
+      outputCanvas.height = preset.height;
+
+      // 1. Draw Target Passport Solid Background
+      ctx.fillStyle = activeBgColor;
+      ctx.fillRect(0, 0, preset.width, preset.height);
+
+      // 2. Compute Zoom & Y Alignment
+      const zoom = parseFloat(document.getElementById('sliderZoom').value);
+      const yOffset = parseFloat(document.getElementById('sliderY').value);
+      document.getElementById('valZoom').innerText = zoom + 'x';
+      document.getElementById('valYPos').innerText = yOffset;
+
+      // Centered Scaling Simulation with portrait head framing
+      const imgRatio = loadedImage.width / loadedImage.height;
+      const canvasRatio = preset.width / preset.height;
+
+      let drawW, drawH;
+      if (imgRatio > canvasRatio) {
+        drawH = preset.height * zoom;
+        drawW = drawH * imgRatio;
+      } else {
+        drawW = preset.width * zoom;
+        drawH = drawW / imgRatio;
+      }
+
+      const drawX = (preset.width - drawW) / 2;
+      const drawY = (preset.height - drawH) / 2 + yOffset;
+
+      ctx.drawImage(loadedImage, drawX, drawY, drawW, drawH);
+    }
+
+    function downloadSinglePhoto() {
+      const link = document.createElement('a');
+      link.download = `passport-photo-${activeFormat}-${FORMAT_PRESETS[activeFormat].ratioText.replace(/\s+/g, '')}.png`;
+      link.href = outputCanvas.toDataURL('image/png', 1.0);
+      link.click();
+    }
+
+    // 2. PRINT SHEET GENERATOR (8-Photo 4x6" Sheet)
+    function generatePrintSheet() {
+      const sheetCanvas = document.createElement('canvas');
+      sheetCanvas.width = 1800; // 6 inches at 300 DPI
+      sheetCanvas.height = 1200; // 4 inches at 300 DPI
+      const sCtx = sheetCanvas.getContext('2d');
+
+      // Fill white background for print sheet
+      sCtx.fillStyle = '#ffffff';
+      sCtx.fillRect(0, 0, sheetCanvas.width, sheetCanvas.height);
+
+      // Draw 2 rows of 4 photos with cutting guide borders
+      const pW = FORMAT_PRESETS[activeFormat].width;
+      const pH = FORMAT_PRESETS[activeFormat].height;
+      
+      const gapX = (1800 - (pW * 0.75 * 4)) / 5;
+      const gapY = (1200 - (pH * 0.75 * 2)) / 3;
+
+      for (let r = 0; r < 2; r++) {
+        for (let c = 0; c < 4; c++) {
+          const posX = gapX + c * (pW * 0.75 + gapX);
+          const posY = gapY + r * (pH * 0.75 + gapY);
+
+          // Draw Photo
+          sCtx.drawImage(outputCanvas, posX, posY, pW * 0.75, pH * 0.75);
+
+          // Draw Thin Cut Border
+          sCtx.strokeStyle = '#cbd5e1';
+          sCtx.lineWidth = 1;
+          sCtx.strokeRect(posX, posY, pW * 0.75, pH * 0.75);
+        }
+      }
+
+      // Download print sheet
+      const link = document.createElement('a');
+      link.download = `passport-print-sheet-4x6.png`;
+      link.href = sheetCanvas.toDataURL('image/png', 1.0);
+      link.click();
+      closeMonetizationModal();
+    }
+
+    // 3. SIGNATURE FORMATTER ENGINE
+    let sigUnit = 'px';
+    const sigW = document.getElementById('sigW');
+    const sigH = document.getElementById('sigH');
+    const sigBox = document.getElementById('sigBox');
+    const sigInput = document.getElementById('sigInput');
+    const sigImg = document.getElementById('sigImg');
+
+    sigInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => { sigImg.src = evt.target.result; };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function setSigUnit(unit) {
+      sigUnit = unit;
+      const btnPx = document.getElementById('btnSigPx');
+      const btnIn = document.getElementById('btnSigIn');
+      const lblW = document.getElementById('lblWidth');
+      const lblH = document.getElementById('lblHeight');
+
+      if (unit === 'px') {
+        btnPx.className = 'px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm';
+        btnIn.className = 'px-2.5 py-1 rounded-md text-slate-600';
+        lblW.innerText = 'Width (px)';
+        lblH.innerText = 'Height (px)';
+        sigW.value = 280;
+        sigH.value = 100;
+      } else {
+        btnIn.className = 'px-2.5 py-1 rounded-md bg-white text-slate-900 shadow-sm';
+        btnPx.className = 'px-2.5 py-1 rounded-md text-slate-600';
+        lblW.innerText = 'Width (in)';
+        lblH.innerText = 'Height (in)';
+        sigW.value = 2.5;
+        sigH.value = 1.0;
+      }
+      renderSignatureBox();
+    }
+
+    function renderSignatureBox() {
+      let w = parseFloat(sigW.value) || 200;
+      let h = parseFloat(sigH.value) || 80;
+      if (sigUnit === 'in') {
+        w = w * 85;
+        h = h * 85;
+      }
+      sigBox.style.width = Math.min(Math.max(w, 60), 280) + 'px';
+      sigBox.style.height = Math.min(Math.max(h, 30), 130) + 'px';
+    }
+
+    function downloadFormattedSignature() {
+      const canvas = document.createElement('canvas');
+      let w = parseFloat(sigW.value) || 300;
+      let h = parseFloat(sigH.value) || 120;
+      if (sigUnit === 'in') {
+        w = w * 300; // 300 DPI convert
+        h = h * 300;
+      }
+      canvas.width = w;
+      canvas.height = h;
+      const sctx = canvas.getContext('2d');
+      sctx.fillStyle = '#ffffff';
+      sctx.fillRect(0, 0, w, h);
+      sctx.drawImage(sigImg, 0, 0, w, h);
+
+      const link = document.createElement('a');
+      link.download = `formatted-signature-${w}x${h}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // 4. ACCURATE DOB & AGE CALCULATION ENGINE
+    function calculateAccurateAge() {
+      const input = document.getElementById('dobInput').value;
+      if (!input) return;
+
+      const dob = new Date(input);
+      const today = TODAY_DATE;
+
+      let years = today.getFullYear() - dob.getFullYear();
+      let months = today.getMonth() - dob.getMonth();
+      let days = today.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      document.getElementById('metricExactAge').innerText = `${years} Y, ${months} M, ${days} D`;
+
+      const diffDays = Math.floor(Math.abs(today - dob) / (1000 * 60 * 60 * 24));
+      document.getElementById('metricTotalDays').innerText = diffDays.toLocaleString();
+
+      let nextBday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+      if (nextBday < today) {
+        nextBday.setFullYear(today.getFullYear() + 1);
+      }
+      const daysToNext = Math.ceil((nextBday - today) / (1000 * 60 * 60 * 24));
+      document.getElementById('metricNextBday').innerText = `${daysToNext} Days`;
+    }
+
+    // 5. MODAL & FEEDBACK CONTROLS
+    function setStars(count) {
+      const stars = document.querySelectorAll('#starsGroup .star svg');
+      stars.forEach((s, idx) => {
+        if (idx < count) {
+          s.classList.add('fill-current', 'text-amber-400');
+          s.classList.remove('text-slate-300');
+        } else {
+          s.classList.remove('fill-current', 'text-amber-400');
+          s.classList.add('text-slate-300');
+        }
+      });
+    }
+
+    function submitFeedback() {
+      document.getElementById('feedbackForm').classList.add('hidden');
+      document.getElementById('feedbackDone').classList.remove('hidden');
+    }
+
+    function openMonetizationModal() { document.getElementById('monetizeModal').classList.remove('hidden'); }
+    function closeMonetizationModal() { document.getElementById('monetizeModal').classList.add('hidden'); }
+    function openTipModal() { document.getElementById('tipModal').classList.remove('hidden'); }
+    function closeTipModal() { document.getElementById('tipModal').classList.add('hidden'); }
+  </script>
+</body>
+</html>
