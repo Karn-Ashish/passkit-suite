@@ -42,4 +42,4 @@ PassKit Pro is a modern, privacy-first web application designed to solve common 
 ### Local Setup
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/your-username/passkit-suite.git](https://github.com/your-username/passkit-suite.git)
+   git clone [https://github.com/Karn-Ashish/passkit-suite.git](https://github.com/Karn-Ashish/passkit-suite.git)
